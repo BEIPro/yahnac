@@ -3,6 +3,7 @@ package com.malmstein.yahnac.presenters;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +20,18 @@ import com.novoda.notils.caster.Views;
 
 public class StoriesAdapter extends CursorRecyclerAdapter<StoriesAdapter.ViewHolder> {
 
+    //Song DeBug
+    private boolean DBG = true;
+    private final String TAG = "StoriesAdapter";
+
     private final StoryListener listener;
     private final TimeAgo timeAgo;
     private LoginSharedPreferences loginSharedPreferences;
 
     public StoriesAdapter(Cursor cursor, StoryListener listener, TimeAgo timeAgo) {
         super(cursor);
+
+        log("cursor = " + cursor.toString());
         this.listener = listener;
         this.timeAgo = timeAgo;
         this.loginSharedPreferences = LoginSharedPreferences.newInstance();
@@ -176,6 +183,15 @@ public class StoriesAdapter extends CursorRecyclerAdapter<StoriesAdapter.ViewHol
             bookmark_action = Views.findById(view, R.id.article_bookmark_action);
             comments_text = Views.findById(view, R.id.article_comments_label);
             vote_action = Views.findById(view, R.id.article_vote_action);
+        }
+    }
+
+    //Song Debug
+    private void log(String string)
+    {
+        if(DBG)
+        {
+            Log.d(TAG, string);
         }
     }
 
